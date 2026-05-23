@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم | = ✨</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Outfit:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+    <div class="admin-container">
+        <div class="admin-glow"></div>
+
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="admin-title-wrapper">
+                <h1>لوحة إدارة موقع الصلح ✨</h1>
+                <p>قم بتعديل النصوص والوسائط والأسئلة لتبدو كما ترغب تماماً بدون لمس الأكواد.</p>
+            </div>
+            <div class="header-actions">
+                <a href="index.html" class="btn btn-secondary">
+                    <span>معاينة الموقع 🌐</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- Directory Sync Status -->
+        <div class="sync-alert-box">
+            <div class="sync-status-indicator">
+                <div id="sync-dot" class="sync-status-dot"></div>
+                <span id="sync-text">حفظ محلي وتنزيل يدوي (المجلد غير متصل)</span>
+            </div>
+            <button id="btn-sync-folder" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.85rem;">
+                <span>ربط مجلد المشروع 📂</span>
+            </button>
+        </div>
+
+        <!-- Navigation Tabs Bar -->
+        <nav class="tabs-bar">
+            <button class="tab-btn active" data-tab="tab-intro">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                </svg>
+                <span>الافتتاحية والقرار</span>
+            </button>
+            <button class="tab-btn" data-tab="tab-questions">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+                <span>الأسئلة التفاعلية</span>
+            </button>
+            <button class="tab-btn" data-tab="tab-credits">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 20h9"></path>
+                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                </svg>
+                <span>شريط رسالة النهاية</span>
+            </button>
+            <button class="tab-btn" data-tab="tab-media">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                    <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+                <span>الوسائط والملفات</span>
+            </button>
+            <button class="tab-btn" data-tab="tab-save">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                    <polyline points="7 3 7 8 15 8"></polyline>
+                </svg>
+                <span>حفظ وتصدير الإعدادات</span>
+            </button>
+        </nav>
+
+        <!-- Panels Container -->
+        <div class="panels-container">
+
+            <!-- TAB 1: INTRO SETTINGS -->
+            <section id="tab-intro" class="tab-panel active">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="person-name">اسم الشخص المستهدف (البطلة)</label>
+                        <input type="text" id="person-name" placeholder="مثال: مسرة">
+                        <span class="info-tip">الاسم المستخدم في عنوان المتصفح والتنبيهات.</span>
+                    </div>
+
+                    <!-- Birthdate Lock Settings -->
+                    <div
+                        style="grid-column: 1 / -1; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1.5rem; margin-top: 1rem; margin-bottom: 1rem;">
+                        <h3 style="font-size: 1.1rem; margin-bottom: 1rem; color: #ff6bcc;">قفل تاريخ الميلاد (حماية
+                            بالرمز السري)</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="enable-birthdate-lock"
+                                    style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                    <input type="checkbox" id="enable-birthdate-lock"
+                                        style="width: 20px; height: 20px;">
+                                    تفعيل قفل تاريخ الميلاد
+                                </label>
+                            </div>
+                            <div class="form-group" style="grid-column: 1 / -1;">
+                                <label>تاريخ الميلاد المطلوب (يجب أن يتطابق تماماً)</label>
+                                <div style="display: flex; gap: 10px; margin-top: 5px; flex-direction: row-reverse;">
+                                    <select id="target-birthdate-day"
+                                        style="padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); color: #fff; flex: 1;">
+                                        <option value="" disabled selected>اليوم</option>
+                                    </select>
+                                    <select id="target-birthdate-month"
+                                        style="padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); color: #fff; flex: 1;">
+                                        <option value="" disabled selected>الشهر</option>
+                                    </select>
+                                    <select id="target-birthdate-year"
+                                        style="padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); color: #fff; flex: 1;">
+                                        <option value="" disabled selected>السنة</option>
+                                    </select>
+                                </div>
+                                <span class="info-tip">يجب على المستخدم اختيار هذا التاريخ بالضبط لفتح الموقع.</span>
+                                <!-- Hidden input to hold the combined string for the existing JS logic -->
+                                <input type="hidden" id="target-birthdate" value="13/6/2006">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="intro-badge-input">نص الشارة العلوية (Badge)</label>
+                        <input type="text" id="intro-badge-input" placeholder="مثال: اعتذار من القلب ❤️">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="intro-title-input">عنوان البطاقة الترحيبية</label>
+                        <input type="text" id="intro-title-input" placeholder="مثال: مسرة">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="intro-text-input">نص رسالة الاعتذار الترحيبية</label>
+                        <textarea id="intro-text-input"
+                            placeholder="اكتب هنا الرسالة الترحيبية التي تظهر في الصفحة الأولى..."></textarea>
+                        <span class="info-tip">يمكنك كتابة وسوم HTML مثل <code>&lt;br&gt;</code> لإنشاء سطر جديد أو
+                            <code>&lt;strong&gt;</code> لتغميق النص.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="btn-yes-input">نص زر الموافقة (YES)</label>
+                        <input type="text" id="btn-yes-input" placeholder="مثال: إي نتصالح 😍">
+                    </div>
+                    <div class="form-group">
+                        <label for="btn-no-input">نص زر الهروب والمخالفة (NO)</label>
+                        <input type="text" id="btn-no-input" placeholder="مثال: لا 🚫">
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1.5rem;">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 1rem; color: #ff6bcc;">بطاقة النهاية الأخيرة (Ending
+                        Card)</h3>
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label for="ending-title-input">العنوان النهائي للموقع</label>
+                            <input type="text" id="ending-title-input"
+                                placeholder="مثال: هذا الموقع سويته لأن ونستيني هلفتره">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="ending-text-input">نص رسالة النهاية</label>
+                            <textarea id="ending-text-input" placeholder="مثال: يلا ياليت نبقة نسولف واتنمر عليج"
+                                style="min-height: 80px;"></textarea>
+                        </div>
+                        <div class="form-group full-width" style="margin-top: 1rem;">
+                            <label for="fake-message-title-input">عنوان خدعة (رسالة الذكرى بعد سنة)</label>
+                            <input type="text" id="fake-message-title-input"
+                                placeholder="مثال: اكتب رسالة لنفسك لتقرأها بعد سنة من الآن!">
+                            <span class="info-tip">ستظهر هذه الخدعة للمستخدم لكتابة رسالة، وبمجرد الإرسال ستصلك فوراً
+                                على تيليجرام ولن تظهر له مجدداً.</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: QUESTIONS SETTINGS -->
+            <section id="tab-questions" class="tab-panel">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.1rem;">تعديل الأسئلة التفاعلية المتتالية</h3>
+                    <button id="btn-add-question" class="btn btn-secondary">إضافة سؤال جديد ➕</button>
+                </div>
+                <div id="questions-list" class="list-editor">
+                    <!-- Dynamic Questions injected here -->
+                </div>
+            </section>
+
+            <!-- TAB 3: CREDITS LETTERS SETTINGS -->
+            <section id="tab-credits" class="tab-panel">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="credits-section-title-input">عنوان شريط النهاية</label>
+                        <input type="text" id="credits-section-title-input" placeholder="مثال: شريط النهاية والاعتراف">
+                    </div>
+                    <div class="form-group">
+                        <label for="credits-highlight-title-input">الاسم المضيء المميز</label>
+                        <input type="text" id="credits-highlight-title-input" placeholder="مثال: مسرة ✨">
+                    </div>
+                </div>
+
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; margin-bottom: 1rem;">
+                    <h3 style="font-size: 1.1rem;">فقرات رسالة الاعتذار السينمائية المتحركة</h3>
+                    <button id="btn-add-paragraph" class="btn btn-secondary">إضافة فقرة جديدة ➕</button>
+                </div>
+
+                <div id="paragraphs-list" class="list-editor">
+                    <!-- Dynamic paragraphs injected here -->
+                </div>
+
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; margin-bottom: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 2rem;">
+                    <h3 style="font-size: 1.1rem; color: #ff6bcc;">أسماء الطالبات في شريط النهاية (Movie Credits Style)
+                    </h3>
+                    <button id="btn-add-credit-name" class="btn btn-secondary">إضافة اسم طالبة ➕</button>
+                </div>
+
+                <div id="credits-names-list" class="list-editor">
+                    <!-- Dynamic student names injected here -->
+                </div>
+            </section>
+
+            <!-- TAB 4: MEDIA ASSETS SETTINGS -->
+            <section id="tab-media" class="tab-panel">
+                <!-- BG Music -->
+                <div style="margin-bottom: 2.2rem;">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">موسيقى الخلفية الهادئة (BG Music)</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>ملف الموسيقى الحالي</label>
+                            <input type="text" id="music-filename" placeholder="music.mp3" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>تحميل موسيقى جديدة (اسحب وأفلت أو اختر ملفاً)</label>
+                            <div class="file-dropzone" id="music-dropzone">
+                                <span class="dropzone-icon">🎵</span>
+                                <span class="dropzone-text">قم بسحب وإفلات ملف <strong>MP3</strong> هنا أو انقر
+                                    للاختيار</span>
+                                <input type="file" id="music-file-input" accept="audio/mpeg, audio/mp3">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="music-preview-container" class="previews-grid" style="display:none;">
+                        <!-- Audio preview widget -->
+                    </div>
+                </div>
+
+                <!-- Memories Slideshow Music -->
+                <div style="margin-bottom: 2.2rem; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 2rem;">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">موسيقى عرض صور الذكريات (Slideshow Memories
+                        Music)</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>ملف موسيقى الذكريات الحالي</label>
+                            <input type="text" id="slideshow-music-filename"
+                                placeholder="بدون موسيقى مخصصة (يستمر تشغيل الموسيقى العامة)" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>تحميل موسيقى مخصصة للذكريات (اسحب وأفلت أو اختر ملفاً)</label>
+                            <div class="file-dropzone" id="slideshow-music-dropzone">
+                                <span class="dropzone-icon">🎵</span>
+                                <span class="dropzone-text">قم بسحب وإفلات ملف <strong>MP3</strong> هنا أو انقر
+                                    للاختيار</span>
+                                <input type="file" id="slideshow-music-file-input" accept="audio/mpeg, audio/mp3">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="slideshow-music-preview-container" class="previews-grid" style="display:none;">
+                        <!-- Audio preview widget -->
+                    </div>
+                </div>
+
+                <!-- Credits Background Image -->
+                <div style="margin-bottom: 2.2rem; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 2rem;">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">صورة الخلفية السينمائية بشريط النهاية</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>الصورة الحالية</label>
+                            <input type="text" id="bg-image-filename" placeholder="photo.jpg" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>رفع صورة خلفية جديدة</label>
+                            <div class="file-dropzone" id="bg-image-dropzone">
+                                <span class="dropzone-icon">🖼️</span>
+                                <span class="dropzone-text">قم بسحب وإفلات صورة <strong>JPG/PNG</strong> هنا أو انقر
+                                    للاختيار</span>
+                                <input type="file" id="bg-image-file-input" accept="image/*">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="bg-image-preview-container" class="previews-grid" style="display:none;">
+                        <!-- Image preview -->
+                    </div>
+                </div>
+
+                <!-- Ending Gallery (Multiple Images) -->
+                <div style="margin-bottom: 2.2rem; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 2rem;">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0.2rem;">صور ذكريات شريط العرض (Memories Slideshow
+                        Photos)</h3>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">سيتم عرض هذه الصور
+                        بالتتالي كعرض منزلق سينمائي قبل ظهور بطاقة النهاية الكلية (تُعرض كل صورة ٣ ثوانٍ ثم تختفي بتلاشٍ
+                        ناعم).</p>
+                    <div class="file-dropzone" id="gallery-dropzone">
+                        <span class="dropzone-icon">📸</span>
+                        <span class="dropzone-text">اسحب وأفلت <strong>مجموعة صور</strong> هنا أو انقر للاختيار</span>
+                        <input type="file" id="gallery-file-input" accept="image/*" multiple>
+                    </div>
+                    <div id="gallery-previews" class="previews-grid">
+                        <!-- Multiple image cards -->
+                    </div>
+                </div>
+
+                <!-- Videos Gallery -->
+                <div style="margin-bottom: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 2rem;">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0.2rem;">فيديو الخلفية المتحرك (Looping Background
+                        Video)</h3>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">اسحب ملف فيديو قصير (أو
+                        أرسله من تيليجرام) ليتم تشغيله وتكراره في الخلفية كخلفية حية ومتحركة للموقع.</p>
+                    <div class="file-dropzone" id="videos-dropzone">
+                        <span class="dropzone-icon">🎥</span>
+                        <span class="dropzone-text">اسحب وأفلت <strong>ملف فيديو MP4/WebM</strong> هنا أو انقر
+                            للاختيار</span>
+                        <input type="file" id="videos-file-input" accept="video/mp4, video/webm, video/*">
+                    </div>
+                    <div id="videos-previews" class="previews-grid">
+                        <!-- Multiple video cards -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 5: SAVE & EXPORT -->
+            <section id="tab-save" class="tab-panel">
+                <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">حفظ وحفظ دائم للموقع</h3>
+
+                <div class="card-item" style="margin-bottom: 1.5rem;">
+                    <h4 style="font-size: 1rem; font-weight: 700; color: #ffffff; margin-bottom: 8px;">1. الحفظ المحلي
+                        السريع (المتصفح الحالي)</h4>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 15px;">
+                        يقوم هذا الخيار بحفظ كافة التغييرات على ذاكرة هذا المتصفح (LocalStorage). ستنعكس التعديلات على
+                        الفور عند فتح الموقع في نفس هذا المتصفح. مفيد للتجربة السريعة قبل النشر الدائم.
+                    </p>
+                    <button id="btn-save-local" class="btn btn-primary">حفظ في المتصفح 💾</button>
+                </div>
+
+                <div class="card-item" style="margin-bottom: 1.5rem;">
+                    <h4 style="font-size: 1rem; font-weight: 700; color: #ffffff; margin-bottom: 8px;">2. تحميل ملف
+                        التكوين (النشر الدائم والدولي)</h4>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 15px;">
+                        لجعل التعديلات تعمل بشكل دائم على جميع الأجهزة والهواتف بعد استضافة الموقع، قم بتحميل ملف
+                        التكوين <code>config.js</code> ووضعه داخل مجلد المشروع الرئيسي ليحل محل الملف القديم.
+                    </p>
+                    <button id="btn-download-config" class="btn btn-secondary">تنزيل ملف config.js 📥</button>
+                </div>
+
+                <div class="card-item" style="border-color: rgba(255, 51, 102, 0.15);">
+                    <h4 style="font-size: 1rem; font-weight: 700; color: #ff4a7b; margin-bottom: 8px;">إعادة ضبط المصنع
+                    </h4>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 15px;">
+                        سيقوم هذا الإجراء بمسح كافة التعديلات المخزنة محلياً وإعادة الموقع إلى نصوصه وأسئلته الافتراضية
+                        الأولى الخاصة بـ "مسرة".
+                    </p>
+                    <button id="btn-reset-defaults" class="btn btn-danger">استعادة النصوص والأسئلة الافتراضية
+                        🔄</button>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Footer log status bar -->
+        <footer class="admin-footer">
+            <div id="status-log" class="status-log">جاهز للتحرير... ✍️</div>
+            <div>
+                <button id="btn-save-main" class="btn btn-primary btn-glow">حفظ التغييرات الكلية 🚀</button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Loaded Config (Failsafe) -->
+    <script src="configRepo.js"></script>
+    <script src="config.js"></script>
+    <!-- Script Logic -->
+    <script src="admin.js"></script>
+</body>
+
+</html>

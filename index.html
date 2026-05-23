@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> | مرحلى الاولى ✨</title>
+
+    <!-- SEO Optimization -->
+    <meta name="description" content="مساحة خاصة جداً لمسرة، تعبير عن الاعتذار والرغبة في فتح صفحة جديدة.">
+    <meta name="keywords" content="مسرة, اعتذار, صلح, موقع تفاعلي, حنين">
+    <meta name="author" content="Antigravity">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Outfit:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- IndexedDB config repo & Dynamic Config overrides -->
+    <script src="configRepo.js"></script>
+    <script src="config.js"></script>
+</head>
+
+<body>
+
+    <!-- Ambient Purple/Pink Particles -->
+    <div class="particles-container" id="particles-container"></div>
+    <div class="background-overlay"></div>
+    <video id="bg-video" autoplay muted loop playsinline class="background-video" style="display: none;"></video>
+
+    <!-- UI Overlay for audio control and settings -->
+    <div class="ui-controls">
+        <button id="btn-audio" class="control-btn" title="تشغيل / كتم الموسيقى" aria-label="Audio Toggle">
+            <svg class="icon-music" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 18V5l12-2v13"></path>
+                <circle cx="6" cy="18" r="3"></circle>
+                <circle cx="18" cy="16" r="3"></circle>
+            </svg>
+            <span class="btn-tooltip">الموسيقى</span>
+        </button>
+        <a href="admin.html" id="btn-admin" class="control-btn" title="لوحة التحكم" aria-label="Admin Dashboard"
+            style="text-decoration: none;">
+            <svg class="icon-admin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 20h9"></path>
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+            </svg>
+            <span class="btn-tooltip">لوحة التحكم</span>
+        </a>
+        <button id="btn-settings" class="control-btn" title="إعدادات بوت تيليجرام" aria-label="Settings Toggle"
+            style="display: none;">
+            <svg class="icon-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path
+                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z">
+                </path>
+            </svg>
+            <span class="btn-tooltip">الإعدادات</span>
+        </button>
+    </div>
+
+    <!-- Main Container -->
+    <main id="app-container">
+
+        <!-- Birthdate Lock Card -->
+        <section id="card-birthdate" class="card active">
+            <div class="card-glow"></div>
+            <div class="card-content">
+                <span class="badge" id="birthdate-badge">قفل الأمان 🔒</span>
+                <h1 class="card-title">من أنتِ؟</h1>
+                <p class="card-text emotional-intro-text">
+                    يرجى إدخال تاريخ ميلادك للوصول إلى هذه المساحة الخاصة.
+                </p>
+                <div
+                    style="margin: 20px 0; display: flex; gap: 10px; justify-content: center; flex-direction: row-reverse;">
+                    <select id="birthdate-day"
+                        style="padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color: #fff; font-size: 1.1rem; font-family: 'Outfit', 'Cairo', sans-serif;">
+                        <option value="" disabled selected>اليوم</option>
+                        <!-- Days 1 to 31 will be populated by JS -->
+                    </select>
+                    <select id="birthdate-month"
+                        style="padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color: #fff; font-size: 1.1rem; font-family: 'Outfit', 'Cairo', sans-serif;">
+                        <option value="" disabled selected>الشهر</option>
+                        <!-- Months 1 to 12 will be populated by JS -->
+                    </select>
+                    <select id="birthdate-year"
+                        style="padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color: #fff; font-size: 1.1rem; font-family: 'Outfit', 'Cairo', sans-serif;">
+                        <option value="" disabled selected>السنة</option>
+                        <!-- Years 1990 to current year will be populated by JS -->
+                    </select>
+                </div>
+                <div class="buttons-wrapper">
+                    <button id="btn-submit-birthdate" class="btn btn-primary btn-glow">الدخول ✨</button>
+                </div>
+                <p id="birthdate-error" style="color: #ff4a7b; display: none; margin-top: 10px; font-size: 0.9rem;">
+                    تاريخ الميلاد غير صحيح، حاولي مرة أخرى.</p>
+            </div>
+        </section>
+
+        <!-- Intro / First Question Card -->
+        <section id="card-intro" class="card">
+            <div class="card-glow"></div>
+            <div class="card-content">
+                <span class="badge" id="intro-badge">اعتذار من القلب ❤️</span>
+                <h1 class="card-title" id="intro-title">مسرة</h1>
+                <p class="card-text emotional-intro-text" id="intro-text">
+                    صراحة إني متعلق بيج، وبنفس الوقت أخاف إنه علاقتنا تخرب، وبنفس الوقت أنا غلطان بحقج شوية، لهذا السبب
+                    أنا سويت هذا الموقع. شنو رأيج نفتح صفحة جديدة مرة ثانية وما أريد إنه تصير أي مشكلة بيناتنا من ورايح،
+                    وبنفس الوقت أثق بيج أكثر من ما أثق بأي شخص ثاني.
+                    <br><br>
+                    <strong>شنو رأيج نتصالح؟</strong>
+                </p>
+                <div class="buttons-wrapper" id="intro-buttons">
+                    <button id="btn-yes" class="btn btn-primary btn-glow">إي نتصالح 😍</button>
+                    <button id="btn-no" class="btn btn-secondary">لا 🚫</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Questions Card -->
+        <section id="card-questions" class="card">
+            <div class="card-glow"></div>
+            <div class="card-content">
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <div class="step-indicator" id="step-indicator">السؤال 1 من 3</div>
+
+                <h2 class="card-title" id="question-text">شتفضلين تشربين؟</h2>
+                <div class="options-wrapper" id="options-wrapper">
+                    <!-- Options will be injected dynamically via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Cinematic Ending / Credits Card -->
+        <section id="card-ending" class="card">
+            <div class="card-glow"></div>
+
+            <!-- Interactive Movie Credits Overlay -->
+            <div class="credits-overlay" id="credits-overlay">
+                <div class="credits-scroll" id="credits-scroll">
+                    <div class="credit-section">
+                        <h2 id="credits-section-title">شريط النهاية والاعتراف</h2>
+                        <h1 class="highlight-title" id="credits-highlight-title">مسرة ✨</h1>
+                    </div>
+
+                    <div class="credit-section emotional-letter" id="credits-letter-container">
+                        <p>مسره صراحة اني لحد هاي اللحظة اسلوبي نفسه اتجاهج صح نتعارك هواي وما نتحاجة ايام او اسابيع بس
+                            بعدني مهتم بيج.</p>
+                        <br>
+                        <p>واتوقع هواي كرهتيني كلش بسبب زعلي منج لأن اني من اكلج شي مو تسوينه صدك! اريدج وياي وتحاولين ع
+                            الاقل تسولفين لأن اسلوبج كله بارد وياي وتدرين بيه كلش زين شكد بارد...</p>
+                        <br>
+                        <p>هسه اذا موافقة تعي نفتح صفحة جديدة ودك سوالف مادام تجي العطلة نجرب شكو لعبة ببالج سوه.</p>
+                    </div>
+
+                    <div class="credit-section credits-names-list" id="credits-names-container">
+                        <!-- Student Names will be dynamically injected here -->
+                    </div>
+
+                    <div class="credit-section end-credit">
+                        <h1>اشعاعيه كامزة❤️</h1>
+                        <p>اضغطي في أي مكان لإنهاء شريط العرض.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cinematic Photo Memories Slideshow -->
+            <div class="memories-slideshow" id="memories-slideshow">
+                <div class="memories-intro" id="memories-intro">
+                    <span class="memories-sparkle">✨</span>
+                    <h2 class="memories-title">لحظة... ذكرى</h2>
+                    <p class="memories-subtitle">ذكرياتي في هذه السنة في المرحلة الأولى</p>
+                </div>
+                <div class="memories-photo-frame" id="memories-photo-frame">
+                    <img id="memories-current-photo" src="" alt="ذكرى">
+                </div>
+            </div>
+
+            <!-- Heartwarming ending content to show after credits -->
+            <div class="card-content ending-content-wrapper" id="ending-content">
+                <div class="heart-pulse-container">
+                    <div class="heart-pulse">❤️</div>
+                </div>
+                <h2 class="card-title" id="ending-title">هذا الموقع سويته لأن ونستيني هلفتره</h2>
+                <p class="card-text emotional-footer-text" id="ending-text">
+                    يلا ياليت نبقة نسولف واتنمر عليج
+                </p>
+
+                <!-- Fake Message Feature -->
+                <div class="fake-message-container"
+                    style="margin-top: 2rem; background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255, 107, 204, 0.2);">
+                    <h3 id="fake-message-title" style="font-size: 1.1rem; margin-bottom: 10px; color: #ff6bcc;">اكتب
+                        رسالة لنفسك لتقرأها بعد سنة من الآن!</h3>
+                    <textarea id="fake-message-input" placeholder="أريد أن أقول لنفسي في المستقبل..."
+                        style="width: 100%; min-height: 80px; padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); color: #fff; font-family: 'Cairo', sans-serif; resize: vertical; margin-bottom: 15px;"></textarea>
+                    <button id="btn-submit-fake-message" class="btn btn-primary" style="width: 100%;">حفظ الرسالة (مقفلة
+                        لمدة سنة) 🔒</button>
+                    <p id="fake-message-success"
+                        style="color: #6bff95; display: none; margin-top: 10px; font-size: 0.95rem;">تم قفل رسالتك
+                        وحفظها بنجاح! ستظهر لك هنا بعد سنة كاملة. ✨</p>
+                </div>
+
+                <div class="buttons-wrapper" style="margin-top: 1.5rem;">
+                    <button id="btn-replay" class="btn btn-primary btn-glow">إعادة المغامرة 🔄</button>
+                    <button id="btn-show-credits" class="btn btn-secondary">قراءة الرسالة مجدداً 📖</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Settings Modal (Glassmorphism) -->
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>إعدادات بوت تيليجرام 🤖</h2>
+                <button class="close-btn" id="btn-close-settings">&times;</button>
+            </div>
+            <p class="modal-desc">
+                أدخل بيانات البوت الخاص بك ليقوم الموقع بإرسال اختيارات مسرة إليك مباشرة بشكل آمن ومحمي.
+            </p>
+            <div class="form-group">
+                <label for="tg-token">رمز البوت (Bot Token)</label>
+                <input type="password" id="tg-token" placeholder="مثال: 123456789:ABCdefGhIJKlmNoPQRsT">
+            </div>
+            <div class="form-group">
+                <label for="tg-chatid">معرّف المحادثة (Chat ID)</label>
+                <input type="text" id="tg-chatid" placeholder="مثال: 987654321">
+            </div>
+            <div class="modal-buttons">
+                <button id="btn-save-settings" class="btn btn-primary btn-glow">حفظ الإعدادات 💾</button>
+                <button id="btn-test-tg" class="btn btn-secondary">تجربة إرسال رسالة 🧪</button>
+            </div>
+            <div id="test-status" class="test-status"></div>
+        </div>
+    </div>
+
+    <!-- Background music: points to music.mp3 where the user can place their Majid Al Muhandis song! -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Main JavaScript File -->
+    <script src="script.js"></script>
+</body>
+
+</html>
